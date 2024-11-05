@@ -1,0 +1,17 @@
+name: basic_selector
+description: Basic Selector is a Flutter package that creates a widget to select a value from a wheeled like picker.
+version: 0.0.1
+homepage:
+repository: https://github.com/eljorgit/basic_selector
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
