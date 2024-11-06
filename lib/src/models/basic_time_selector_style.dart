@@ -9,5 +9,9 @@ class BasicTimeSelectorStyle extends BasicSelectorStyle {
       fontWeight: FontWeight.bold,
       fontSize: 20,
     ),
+    super.edgesGradientBackgroundColor,
+    super.notSelectedValueTextStyle,
+    super.selectedValueContainerDecoration,
+    super.selectedValueTextStyle,
   });
 }

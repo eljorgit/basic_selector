@@ -4,7 +4,7 @@ class BasicSelectorStyle {
   final TextStyle selectedValueTextStyle;
   final TextStyle notSelectedValueTextStyle;
   final BoxDecoration? selectedValueContainerDecoration;
-  final Color? bordersGradientBackgroundColor;
+  final Color? edgesGradientBackgroundColor;
 
   const BasicSelectorStyle({
     this.selectedValueTextStyle = const TextStyle(
@@ -14,24 +14,6 @@ class BasicSelectorStyle {
       fontWeight: FontWeight.normal,
     ),
     this.selectedValueContainerDecoration,
-    this.bordersGradientBackgroundColor,
+    this.edgesGradientBackgroundColor,
   });
-
-  BasicSelectorStyle copyWith({
-    TextStyle? selectedValueTextStyle,
-    TextStyle? notSelectedValueTextStyle,
-    BoxDecoration? selectedValueContainerDecoration,
-    Color? bordersGradientBackgroundColor,
-  }) {
-    return BasicSelectorStyle(
-      selectedValueTextStyle:
-          selectedValueTextStyle ?? this.selectedValueTextStyle,
-      notSelectedValueTextStyle:
-          notSelectedValueTextStyle ?? this.notSelectedValueTextStyle,
-      selectedValueContainerDecoration: selectedValueContainerDecoration ??
-          this.selectedValueContainerDecoration,
-      bordersGradientBackgroundColor:
-          bordersGradientBackgroundColor ?? this.bordersGradientBackgroundColor,
-    );
-  }
 }

@@ -62,11 +62,9 @@ class _BasicSelectorState<T> extends State<BasicSelector<T>> {
     if (widget.reversed) {
       var reversedIndex = widget.items.length - 1 - _selectedIndex;
 
-      _scrollController =
-          FixedExtentScrollController(initialItem: reversedIndex);
+      _scrollController = FixedExtentScrollController(initialItem: reversedIndex);
     } else {
-      _scrollController =
-          FixedExtentScrollController(initialItem: _selectedIndex);
+      _scrollController = FixedExtentScrollController(initialItem: _selectedIndex);
     }
   }
 
@@ -190,19 +188,13 @@ class _BorderGradient extends StatelessWidget {
       decoration: BoxDecoration(
           gradient: LinearGradient(
         colors: [
-          styles.bordersGradientBackgroundColor ??
-              Theme.of(context).scaffoldBackgroundColor,
-          (styles.bordersGradientBackgroundColor ??
-                  Theme.of(context).scaffoldBackgroundColor)
+          styles.edgesGradientBackgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+          (styles.edgesGradientBackgroundColor ?? Theme.of(context).scaffoldBackgroundColor)
               .withAlpha(0),
         ],
         stops: const [0.3, 1],
-        begin: isBottomBorder
-            ? FractionalOffset.bottomCenter
-            : FractionalOffset.topCenter,
-        end: isBottomBorder
-            ? FractionalOffset.topCenter
-            : FractionalOffset.bottomCenter,
+        begin: isBottomBorder ? FractionalOffset.bottomCenter : FractionalOffset.topCenter,
+        end: isBottomBorder ? FractionalOffset.topCenter : FractionalOffset.bottomCenter,
         tileMode: TileMode.repeated,
       )),
     );

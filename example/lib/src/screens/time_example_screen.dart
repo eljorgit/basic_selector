@@ -12,8 +12,7 @@ class TimeExampleScreen extends StatefulWidget {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         return SlideTransition(
           position: animation.drive(tween),
           child: child,
@@ -29,8 +28,7 @@ class TimeExampleScreen extends StatefulWidget {
 }
 
 class _TimeExampleScreenState extends State<TimeExampleScreen> {
-  static final List<TimeOfDay> _times =
-      BasicSelectorHelpers.generateTimes(minuteStep: 5);
+  static final List<TimeOfDay> _times = BasicSelectorHelpers.generateTimes(minuteStep: 5);
   TimeOfDay _selectedTimeBasic = _times.first;
   TimeOfDay _selectedTime = _times.first;
   TimeOfDay _selectedTimeFrom = const TimeOfDay(hour: 13, minute: 30);
@@ -125,8 +123,7 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                   child: BasicTimeSelector(
                     time: _selectedTimeFrom,
                     currentTime: const TimeOfDay(hour: 13, minute: 30),
-                    config: const BasicTimeSelectorConfig(
-                        showOnlyFromCurrentType: true),
+                    config: const BasicTimeSelectorConfig(showOnlyFromCurrentType: true),
                     textFormatter: (item) {
                       return item.formatted();
                     },
@@ -150,8 +147,7 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                   child: BasicTimeSelector(
                     time: _selectedTimeTo,
                     currentTime: const TimeOfDay(hour: 13, minute: 30),
-                    config: const BasicTimeSelectorConfig(
-                        showOnlyToCurrentType: true),
+                    config: const BasicTimeSelectorConfig(showOnlyToCurrentType: true),
                     textFormatter: (item) {
                       return item.formatted();
                     },
@@ -175,6 +171,51 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                     onPressed: () => BasicTimeSelector.showModalDialog(
                       context,
                       time: _selectedTimeDialog,
+                    ).then((value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedTimeDialog = value;
+                        });
+
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                            content: Text(
+                              'Date selected: ${_selectedTimeDialog.formatted()}',
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                      }
+                    }),
+                    child: const Text('Open dialog'),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  'With basic time selector from styled dialog: ${_selectedTimeDialog.formatted()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Center(
+                  child: FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: Colors.green,
+                    ),
+                    onPressed: () => BasicTimeSelector.showModalDialog(
+                      context,
+                      time: _selectedTimeDialog,
+                      styles: BasicTimeSelectorStyle(
+                        edgesGradientBackgroundColor: Colors.green,
+                        selectedValueContainerDecoration: BoxDecoration(
+                          color: Colors.green[200],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      dialogConfig: const BasicTimeSelectorDialogConfig(
+                        backgroundColor: Colors.green,
+                      ),
                     ).then((value) {
                       if (value != null) {
                         setState(() {
