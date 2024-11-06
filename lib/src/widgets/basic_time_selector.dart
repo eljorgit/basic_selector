@@ -178,7 +178,7 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
           start: _currentTime.minute,
-          end: 60,
+          end: 59,
           step: _config.minuteStep,
         ).reversed.toList();
         _reverseMinutes = true;
@@ -188,7 +188,7 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
       }
     }
     if (_config.showOnlyToCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(start: 59, end: _currentTime.hour);
+      _hours = BasicSelectorHelpers.generateNumbers(start: 00, end: _currentTime.hour);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
