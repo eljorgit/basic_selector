@@ -32,7 +32,8 @@ class BasicTimeSelector extends StatefulWidget {
     double height = 200,
     BasicTimeSelectorStyle styles = const BasicTimeSelectorStyle(),
     BasicTimeSelectorConfig config = const BasicTimeSelectorConfig(),
-    BasicTimeSelectorDialogConfig dialogConfig = const BasicTimeSelectorDialogConfig(),
+    BasicTimeSelectorDialogConfig dialogConfig =
+        const BasicTimeSelectorDialogConfig(),
     bool loop = false,
   }) async {
     return await showModal<TimeOfDay>(
@@ -55,7 +56,8 @@ class BasicTimeSelector extends StatefulWidget {
                     dialogConfig.title,
                     style: dialogConfig.titleStyle,
                   ),
-                  if (dialogConfig.description != null && dialogConfig.description!.isNotEmpty)
+                  if (dialogConfig.description != null &&
+                      dialogConfig.description!.isNotEmpty)
                     Text(
                       dialogConfig.description!,
                       style: dialogConfig.descriptionStyle ??
@@ -132,12 +134,14 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
 
   void initTimeLists() {
     _hours = BasicSelectorHelpers.generateNumbers(end: 24);
-    _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+    _minutes =
+        BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
   }
 
   void _updateTimeLists() {
     if (_config.showOnlyFromCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(start: _currentTime.hour, end: 24);
+      _hours = BasicSelectorHelpers.generateNumbers(
+          start: _currentTime.hour, end: 24);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
@@ -147,12 +151,14 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
         ).reversed.toList();
         _reverseMinutes = true;
       } else {
-        _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+        _minutes = BasicSelectorHelpers.generateNumbers(
+            end: 60, step: _config.minuteStep);
         _reverseMinutes = false;
       }
     }
     if (_config.showOnlyToCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(start: 00, end: _currentTime.hour);
+      _hours = BasicSelectorHelpers.generateNumbers(
+          start: 00, end: _currentTime.hour);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
@@ -161,7 +167,8 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
           step: _config.minuteStep,
         );
       } else {
-        _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+        _minutes = BasicSelectorHelpers.generateNumbers(
+            end: 60, step: _config.minuteStep);
       }
     }
   }
@@ -169,7 +176,8 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
   BasicTimeSelectorStyle get _styles => widget.styles;
   BasicTimeSelectorConfig get _config => widget.config;
 
-  bool get _needsUpdate => _config.showOnlyFromCurrentType || _config.showOnlyToCurrentType;
+  bool get _needsUpdate =>
+      _config.showOnlyFromCurrentType || _config.showOnlyToCurrentType;
 
   @override
   Widget build(BuildContext context) {
