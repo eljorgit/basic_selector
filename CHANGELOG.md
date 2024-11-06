@@ -25,3 +25,7 @@
 ## 0.1.1
 
 * Fix basic time selector generated times as last value for hour to `23` and minutes to `59`
+
+## 0.1.1+1
+
+* Fix readme to include .gif urls for examples
