@@ -181,8 +181,8 @@ If you want to see some usage examples, clone the [example app](https://github.c
 | **onChanged** | `ValueChanged<TimeOfDay>` | A void callback function that runs when the selector changes | | :heavy_check_mark: |
 | **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
-| **styles** | [`BasicTimeSelectorStyle`](#`BasicTimeSelectorStyle`) | A way to style the `BasicTimeSelector` | `const BasicTimeSelectorStyle()` | |
-| **config** | [`BasicTimeSelectorConfig`](#`BasicTimeSelectorConfig`) | A way to configure the `BasicTimeSelector` | `const BasicTimeSelectorConfig()` | |
+| **styles** | [`BasicTimeSelectorStyle`](#basic_time_selector_style_properties) | A way to style the `BasicTimeSelector` | `const BasicTimeSelectorStyle()` | |
+| **config** | [`BasicTimeSelectorConfig`](#basic_time_selector_config_properties) | A way to configure the `BasicTimeSelector` | `const BasicTimeSelectorConfig()` | |
 | **loop** | `bool` | Enables infinite scroll for `items` | `false` | |
 
 ### `BasicTimeSelector.showModalDialog()`
