@@ -172,9 +172,9 @@ If you want to see some usage examples, clone the [example app](https://github.c
 | Property | Type | Description | Default Value | Required |
 |:--------:|:----:|:------------|:--------------|:--------:|
 | **items** | `List<T>` | The list of items to be iterated on the selector | | ✅ |
-| **value** | `T` | The selected value | | ✅ |
+| **value** | `T` | The selected initial value, must be a value from items | | ✅ |
 | **onChanged** | `ValueChanged<T>` | A void callback function that runs when the selector changes | | ✅ |
-| **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector | `null` | |
+| **textFormatter** | `TextFormatter<T>` | A way to format the text shown on the selector | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
 | **styles** | [`BasicSelectorStyle`](#basic_selector_style_properties) | A way to style the `BasicSelector` | `const BasicSelectorStyle()` | |
 | **loop** | `bool` | Enables infinite scroll for `items` | `false` | |
@@ -232,9 +232,9 @@ Extends all properties from `BasicSelectorStyle` and also
 | Property | Type | Description | Default Value | Required |
 |:--------:|:----:|:------------|:--------------|:--------:|
 | **title** | `String` | A title for the dialog | `'Select a time'` | |
-| **titleStyle** | `TextStyle` | A way to style the title for the dialog | `const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,)` | |
-| **description** | `String` | A description for the dialog, that goes below the `title` | `null` | |
-| **titleStyle** | `TextStyle` | A way to style the title for the dialog | `null` ?? `TextStyle(fontSize: 12, color: Colors.grey[600])` | |
+| **titleStyle** | `TextStyle` | A way to style the title of the dialog | `const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,)` | |
+| **description** | `String` | A description for the dialog, that goes right below the `title` | `null` | |
+| **titleStyle** | `TextStyle` | A way to style the description of the dialog | `null` ?? `TextStyle(fontSize: 12, color: Colors.grey[600],)` | |
 | **backgroundColor** | `Color` | The background color for the dialog | `null` | |
 | **elevation** | `double` | The elevation for the dialog | `null` | |
 | **shape** | `ShapeBorder` | The shape for the dialog | `null` ?? `RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),)` | |
@@ -242,6 +242,9 @@ Extends all properties from `BasicSelectorStyle` and also
 | **confirmButtonText** | `String` | The text used for the confirm button (ignored if `confirmButtonBuilder` is used) | `'Confirm'` | |
 | **cancelButtonBuilder** | `Widget Function()` | A builder for the cancel button, if not provided a default `TextButton` will be used | `null` | |
 | **cancelButtonText** | `String` | The text used for the cancel button (ignored if `cancelButtonBuilder` is used) | `'Cancel'` | |
+| **padding** | `EdgeInsets` | The padding for for the actions (the confirm and cancel buttons, or the builders) and for the content | `null` | |
+| **builder** | `Widget Function(BasicTimeSelector basicTimeSelector, TimeOfDay? selectedTime)` | This is a `Builder` for the content of the dialog, the parameter `value` is the `BasicTimeSelector` you should use in the builder. | `null` | |
+| **extraContent** | `List<Widget>` | Extra content that will go right below the `BasicTimeSelector` on the dialog (ignored if a `builder` is used) | `null` | |
 
 <br />
 <br />

@@ -1,14 +1,30 @@
 import 'package:basic_selector/src/models/models.dart';
 import 'package:flutter/material.dart';
 
+/// A wheeled like picker for a [List] of items.
 class BasicSelector<T> extends StatefulWidget {
+  /// The [List] of [items] to be iterated on the selector
   final List<T> items;
+
+  /// The selected initial [value], must be a value from [items]
   final T value;
+
+  /// A void callback function that runs when the selector changes
   final ValueChanged<T> onChanged;
+
+  /// A way to format the text shown on the selector
   final String Function(T item)? textFormatter;
+
+  /// The height of the selector
   final double height;
+
+  /// A way to style the [BasicSelector]
   final BasicSelectorStyle styles;
+
+  ///Enables infinite scroll for [items]
   final bool loop;
+
+  /// To reverse the [items]
   final bool reversed;
 
   const BasicSelector({

@@ -214,7 +214,89 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                         ),
                       ),
                       dialogConfig: const BasicTimeSelectorDialogConfig(
-                        backgroundColor: Colors.green,
+                          backgroundColor: Colors.green,
+                          description:
+                              'This is a description, you can specify here maybe for what will this time used.\n\n'
+                              'PD.: I know this style is ugly, but it is just an example XD'),
+                    ).then((value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedTimeDialog = value;
+                        });
+
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                            content: Text(
+                              'Date selected: ${_selectedTimeDialog.formatted()}',
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                      }
+                    }),
+                    child: const Text('Open dialog'),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  'With basic time selector from dialog with a custom builder: ${_selectedTimeDialog.formatted()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Center(
+                  child: FilledButton(
+                    onPressed: () => BasicTimeSelector.showModalDialog(
+                      context,
+                      time: _selectedTimeDialog,
+                      dialogConfig: BasicTimeSelectorDialogConfig(
+                        cancelButtonText: '',
+                        confirmButtonText: '',
+                        builder: (basicTimeSelector, selectedTime) {
+                          return Column(
+                            children: [
+                              const Text('Press this button to select now time'),
+                              FilledButton.icon(
+                                onPressed: () => Navigator.of(context).pop(TimeOfDay.now()),
+                                label: const Text('Now'),
+                                icon: const Icon(Icons.schedule),
+                              ),
+                              const SizedBox(height: 10),
+                              basicTimeSelector,
+                              const SizedBox(height: 10),
+                              const Text(
+                                  'And now the confirm and cancel button will be hidden, because the text on each one is empty, and some custom confirm and cancel buttons used instead.'),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: FilledButton.icon(
+                                      style: FilledButton.styleFrom(
+                                        backgroundColor: Colors.red,
+                                        foregroundColor: Colors.white,
+                                      ),
+                                      onPressed: () => Navigator.of(context).pop(null),
+                                      label: const Text('Cancel'),
+                                      icon: const Icon(Icons.close),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: FilledButton.icon(
+                                      style: FilledButton.styleFrom(
+                                        backgroundColor: Colors.blue,
+                                      ),
+                                      onPressed: () => Navigator.of(context).pop(selectedTime),
+                                      label: const Text('Save'),
+                                      icon: const Icon(Icons.save),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ).then((value) {
                       if (value != null) {

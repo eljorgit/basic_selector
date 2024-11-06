@@ -2,14 +2,36 @@ import 'package:animations/animations.dart';
 import 'package:basic_selector/basic_selector.dart';
 import 'package:flutter/material.dart';
 
+/// This [BasicTimeSelector] uses two [BasicSelector] with
+/// a [TimeOfDay] type.
+///
+/// Returns a [TimeOfDay] from the hour and minutes
+/// selected from each selector.
 class BasicTimeSelector extends StatefulWidget {
+  /// The selected [time] value
   final TimeOfDay time;
+
+  /// In case is needed a different time from `TimeOfDay.now()`
+  ///
+  /// Defaults to `TimeOfDay.now()`
   final TimeOfDay? currentTime;
+
+  /// A void callback function that runs when the selector changes
   final ValueChanged<TimeOfDay> onChanged;
+
+  /// A way to format the text shown on the selector
   final String Function(TimeOfDay item)? textFormatter;
+
+  /// The height of the selector
   final double height;
+
+  /// A way to style the [BasicTimeSelector]
   final BasicTimeSelectorStyle styles;
+
+  /// A way to configure the [BasicTimeSelector]
   final BasicTimeSelectorConfig config;
+
+  /// Enables infinite scroll for the generated times
   final bool loop;
 
   const BasicTimeSelector({
@@ -24,6 +46,7 @@ class BasicTimeSelector extends StatefulWidget {
     this.loop = false,
   });
 
+  /// Shows a modal dialog with a [BasicTimeSelector]
   static Future<TimeOfDay?> showModalDialog(
     BuildContext context, {
     required TimeOfDay time,
@@ -32,8 +55,7 @@ class BasicTimeSelector extends StatefulWidget {
     double height = 200,
     BasicTimeSelectorStyle styles = const BasicTimeSelectorStyle(),
     BasicTimeSelectorConfig config = const BasicTimeSelectorConfig(),
-    BasicTimeSelectorDialogConfig dialogConfig =
-        const BasicTimeSelectorDialogConfig(),
+    BasicTimeSelectorDialogConfig dialogConfig = const BasicTimeSelectorDialogConfig(),
     bool loop = false,
   }) async {
     return await showModal<TimeOfDay>(
@@ -41,6 +63,21 @@ class BasicTimeSelector extends StatefulWidget {
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
+            final basicTimeSelector = BasicTimeSelector(
+              time: time,
+              currentTime: currentTime,
+              onChanged: (value) {
+                setState(() {
+                  time = value;
+                });
+              },
+              textFormatter: textFormatter,
+              height: height,
+              styles: styles,
+              config: config,
+              loop: loop,
+            );
+
             return AlertDialog(
               elevation: dialogConfig.elevation,
               backgroundColor: dialogConfig.backgroundColor,
@@ -52,37 +89,34 @@ class BasicTimeSelector extends StatefulWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    dialogConfig.title,
-                    style: dialogConfig.titleStyle,
-                  ),
-                  if (dialogConfig.description != null &&
-                      dialogConfig.description!.isNotEmpty)
+                  if (dialogConfig.title.isNotEmpty)
+                    Text(
+                      dialogConfig.title,
+                      style: dialogConfig.titleStyle,
+                    ),
+                  if (dialogConfig.description != null && dialogConfig.description!.isNotEmpty)
                     Text(
                       dialogConfig.description!,
                       style: dialogConfig.descriptionStyle ??
                           TextStyle(fontSize: 12, color: Colors.grey[600]),
                     ),
-                  BasicTimeSelector(
-                    time: time,
-                    currentTime: currentTime,
-                    onChanged: (value) {
-                      setState(() {
-                        time = value;
-                      });
-                    },
-                    textFormatter: textFormatter,
-                    height: height,
-                    styles: styles,
-                    config: config,
-                    loop: loop,
-                  ),
+                  if (dialogConfig.builder != null)
+                    dialogConfig.builder!(
+                      basicTimeSelector,
+                      time,
+                    )
+                  else
+                    basicTimeSelector,
+                  ...dialogConfig.extraContent
                 ],
               ),
+              contentPadding: dialogConfig.padding,
+              actionsPadding:
+                  dialogConfig.padding ?? const EdgeInsets.only(left: 15, right: 15, bottom: 15),
               actions: [
                 if (dialogConfig.cancelButtonBuilder != null)
                   dialogConfig.cancelButtonBuilder!()
-                else
+                else if (dialogConfig.cancelButtonText.isNotEmpty)
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     style: TextButton.styleFrom(
@@ -95,7 +129,7 @@ class BasicTimeSelector extends StatefulWidget {
                   ),
                 if (dialogConfig.confirmButtonBuilder != null)
                   dialogConfig.confirmButtonBuilder!(time)
-                else
+                else if (dialogConfig.confirmButtonText.isNotEmpty)
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(time),
                     style: TextButton.styleFrom(
@@ -134,14 +168,12 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
 
   void initTimeLists() {
     _hours = BasicSelectorHelpers.generateNumbers(end: 24);
-    _minutes =
-        BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+    _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
   }
 
   void _updateTimeLists() {
     if (_config.showOnlyFromCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(
-          start: _currentTime.hour, end: 24);
+      _hours = BasicSelectorHelpers.generateNumbers(start: _currentTime.hour, end: 24);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
@@ -151,14 +183,12 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
         ).reversed.toList();
         _reverseMinutes = true;
       } else {
-        _minutes = BasicSelectorHelpers.generateNumbers(
-            end: 60, step: _config.minuteStep);
+        _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
         _reverseMinutes = false;
       }
     }
     if (_config.showOnlyToCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(
-          start: 00, end: _currentTime.hour);
+      _hours = BasicSelectorHelpers.generateNumbers(start: 00, end: _currentTime.hour);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
@@ -167,8 +197,7 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
           step: _config.minuteStep,
         );
       } else {
-        _minutes = BasicSelectorHelpers.generateNumbers(
-            end: 60, step: _config.minuteStep);
+        _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
       }
     }
   }
@@ -176,8 +205,7 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
   BasicTimeSelectorStyle get _styles => widget.styles;
   BasicTimeSelectorConfig get _config => widget.config;
 
-  bool get _needsUpdate =>
-      _config.showOnlyFromCurrentType || _config.showOnlyToCurrentType;
+  bool get _needsUpdate => _config.showOnlyFromCurrentType || _config.showOnlyToCurrentType;
 
   @override
   Widget build(BuildContext context) {
