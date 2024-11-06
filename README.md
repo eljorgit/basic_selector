@@ -2,6 +2,21 @@
 
 [![pub package](https://img.shields.io/pub/v/basic_selector.svg)](https://pub.dev/packages/basic_selector)
 
+### With `BasicSelector`
+| Basic with numbers | Styling items with numbers | Styling container with numbers |
+|:---------:|:---------:|:--------------:|
+| ![](/assets/basic_numeric_selector.gif) | ![](/assets/basic_numeric_selector_styled_1.gif) | ![](/assets/basic_numeric_selector_styled_2.gif) |
+
+
+| Basic with text | Basic loop with text
+|:---------:|:---------:|
+| ![](/assets/basic_text_selector.gif) | ![](/assets/basic_text_selector_loop.gif) |
+
+### With `BasicTimeSelector`
+| Basic with time | Basic time selector | Basic time selector on dialog |
+|:---------:|:---------:|:--------------:|
+| ![](/assets/basic_selector_with_time.gif) | ![](/assets/basic_time_selector.gif) | ![](/assets/basic_time_selector_dialog.gif) |
+
 ## How to use
 The `BasicSelector` widget has three constructors. The `BasicSelector()` will use the default style. Also `BasicSelector.items()` which just uses the items list as formal parameter and `BasicSelector.loop()` which enables loop by default and just scrolls infinitely through the items provided.
 
@@ -119,10 +134,10 @@ static final List<int> _numbers = BasicSelectorHelpers.generateNumbers(start: 25
 // [25, 30, 35, 40, 45, 50]
 ```
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
+|:--------:|:----:|:------------|:--------------|:--------:|
 | **start** | `num` | The start number of the generated list | `null` ?? `0` | |
-| **start** | `num` | The end number of the generated list | | :heavy_check_mark: |
-| **start** | `num` | The interval of number of the generated list | `1` | |
+| **end** | `num` | The end number of the generated list | | ✅ |
+| **step** | `num` | The interval of number of the generated list | `1` | |
 
 ### `List<String> generateAlphabet()`
 Generates a list of `<String>` with the letters of the alphabet.
@@ -141,7 +156,7 @@ static final List<TimeOfDay> _times = BasicSelectorHelpers.generateTimes(minuteS
 // [TimeOfDay(0, 0), TimeOfDay(0, 30), TimeOfDay(1, 0), TimeOfDay(1, 30), ..., TimeOfDay(23, 30)]
 ```
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
+|:--------:|:----:|:------------|:--------------|:--------:|
 | **from** | `TimeOfDay` | From time to generate list | `null` ?? `const TimeOfDay(hour: 00, minute: 00)` | |
 | **to** | `TimeOfDay` | To time to generate list | `null` ?? `const TimeOfDay(hour: 23, minute: 59)` | |
 | **minuteStep** | `int` | The interval of minutes to generate list | `1` | |
@@ -155,10 +170,10 @@ If you want to see some usage examples, clone the [example app](https://github.c
 # Properties
 ### `BasicSelector`
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
-| **items** | `List<T>` | The list of items to be iterated on the selector | | :heavy_check_mark: |
-| **value** | `T` | The selected value | | :heavy_check_mark: |
-| **onChanged** | `ValueChanged<T>` | A void callback function that runs when the selector changes | | :heavy_check_mark: |
+|:--------:|:----:|:------------|:--------------|:--------:|
+| **items** | `List<T>` | The list of items to be iterated on the selector | | ✅ |
+| **value** | `T` | The selected value | | ✅ |
+| **onChanged** | `ValueChanged<T>` | A void callback function that runs when the selector changes | | ✅ |
 | **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
 | **styles** | [`BasicSelectorStyle`](#basic_selector_style_properties) | A way to style the `BasicSelector` | `const BasicSelectorStyle()` | |
@@ -167,7 +182,7 @@ If you want to see some usage examples, clone the [example app](https://github.c
 
 ### `BasicSelectorStyle` <a id="basic_selector_style_properties"></a>
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
+|:--------:|:----:|:------------|:--------------|:--------:|
 | **selectedValueTextStyle** | `TextStyle` | Style for the selected value | `const TextStyle(fontWeight: FontWeight.bold)` | |
 | **notSelectedValueTextStyle** | `TextStyle` | Style for the rest of the values that are not selected | `const TextStyle(fontWeight: FontWeight.normal)` | |
 | **selectedValueContainerDecoration** | `BoxDecoration` | Style for the container around the selected value | `null` ?? `BoxDecoration(color: Theme.of(context).colorScheme.surface,borderRadius: BorderRadius.circular(10),border: Border.all(color: Theme.of(context).colorScheme.primary,),)` | |
@@ -175,10 +190,10 @@ If you want to see some usage examples, clone the [example app](https://github.c
 
 ### `BasicTimeSelector` <a id="basic_time_selector_properties"></a>
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
-| **time** | `TimeOfDay` | The selected time value | | :heavy_check_mark: |
+|:--------:|:----:|:------------|:--------------|:--------:|
+| **time** | `TimeOfDay` | The selected time value | | ✅ |
 | **currentTime** | `TimeOfDay` | In case is needed a different time from `TimeOfDay.now()` | `null` ?? `TimeOfDay.now()` | |
-| **onChanged** | `ValueChanged<TimeOfDay>` | A void callback function that runs when the selector changes | | :heavy_check_mark: |
+| **onChanged** | `ValueChanged<TimeOfDay>` | A void callback function that runs when the selector changes | | ✅ |
 | **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
 | **styles** | [`BasicTimeSelectorStyle`](#basic_time_selector_style_properties) | A way to style the `BasicTimeSelector` | `const BasicTimeSelectorStyle()` | |
@@ -187,9 +202,9 @@ If you want to see some usage examples, clone the [example app](https://github.c
 
 ### `BasicTimeSelector.showModalDialog()`
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
-| **context** | `BuildContext` | Current context | | :heavy_check_mark: |
-| **time** | `TimeOfDay` | The selected time value | | :heavy_check_mark: |
+|:--------:|:----:|:------------|:--------------|:--------:|
+| **context** | `BuildContext` | Current context | | ✅ |
+| **time** | `TimeOfDay` | The selected time value | | ✅ |
 | **currentTime** | `TimeOfDay` | In case is needed a different time from `TimeOfDay.now()` | `null` ?? `TimeOfDay.now()` | |
 | **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector on the dialog | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
@@ -201,12 +216,12 @@ If you want to see some usage examples, clone the [example app](https://github.c
 ### `BasicTimeSelectorStyle` <a id="basic_time_selector_style_properties"></a>
 Extends all properties from `BasicSelectorStyle` and also
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
+|:--------:|:----:|:------------|:--------------|:--------:|
 | **twoDotSeparatorStyle** | `TextStyle` | Style for ':' that is in the middle of the two selectors | `const TextStyle(fontWeight: FontWeight.bold,fontSize: 20,)` | |
 
 ### `BasicTimeSelectorConfig` <a id="basic_time_selector_config_properties"></a>
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
+|:--------:|:----:|:------------|:--------------|:--------:|
 | **showOnlyFromCurrentType** | `bool` | Shows only the times from the selected `currentTime` | `false` | |
 | **showOnlyToCurrentType** | `bool` | Shows only the times to the selected `currentTime` | `false` | |
 | **minuteStep** | `int` | Interval for the generated minutes (**must be a divider of 60**) | `1` | |
@@ -215,7 +230,7 @@ Extends all properties from `BasicSelectorStyle` and also
 
 ### `BasicTimeSelectorDialogConfig` <a id="basic_time_selector_dialog_config_properties"></a>
 | Property | Type | Description | Default Value | Required |
-|:---------|:-----|:------------|:--------------|:---------|
+|:--------:|:----:|:------------|:--------------|:--------:|
 | **title** | `String` | A title for the dialog | `'Select a time'` | |
 | **titleStyle** | `TextStyle` | A way to style the title for the dialog | `const TextStyle(fontWeight: FontWeight.bold,fontSize: 16,)` | |
 | **description** | `String` | A description for the dialog, that goes below the `title` | `null` | |
@@ -232,4 +247,11 @@ Extends all properties from `BasicSelectorStyle` and also
 <br />
 <br />
 
-If you like this package, consider supporting it by giving it a star on [GitHub](https://github.com/eljorgit/basic_selector) and a like on [pub.dev](https://pub.dev/packages/basic_selector) :heart:
+If you like this package, consider supporting it by giving it a star on [GitHub](https://github.com/eljorgit/basic_selector) and a like on [pub.dev](https://pub.dev/packages/basic_selector) 💙
+
+⌨️ with ❤️ by eljorgit🙃
+
+## Donate
+You like the package? Buy me a coffee :)
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G415R4SG)
