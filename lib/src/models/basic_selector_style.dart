@@ -24,10 +24,12 @@ class BasicSelectorStyle {
     Color? bordersGradientBackgroundColor,
   }) {
     return BasicSelectorStyle(
-      selectedValueTextStyle: selectedValueTextStyle ?? this.selectedValueTextStyle,
-      notSelectedValueTextStyle: notSelectedValueTextStyle ?? this.notSelectedValueTextStyle,
-      selectedValueContainerDecoration:
-          selectedValueContainerDecoration ?? this.selectedValueContainerDecoration,
+      selectedValueTextStyle:
+          selectedValueTextStyle ?? this.selectedValueTextStyle,
+      notSelectedValueTextStyle:
+          notSelectedValueTextStyle ?? this.notSelectedValueTextStyle,
+      selectedValueContainerDecoration: selectedValueContainerDecoration ??
+          this.selectedValueContainerDecoration,
       bordersGradientBackgroundColor:
           bordersGradientBackgroundColor ?? this.bordersGradientBackgroundColor,
     );

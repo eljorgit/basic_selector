@@ -2,7 +2,8 @@ import 'package:example/src/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
-  static Route onGenerateRoute(RouteSettings settings) => switch (settings.name) {
+  static Route onGenerateRoute(RouteSettings settings) =>
+      switch (settings.name) {
         HomeScreen.routeName => HomeScreen.route(),
         NumericExampleScreen.routeName => NumericExampleScreen.route(),
         TextExampleScreen.routeName => TextExampleScreen.route(),

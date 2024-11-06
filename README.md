@@ -51,8 +51,8 @@ BasicSelector<int>(
 `basic_selector` also provides another widget built with `BasicSelector`, one for selecting times (`TimeOfDay`): `BasicTimeSelector`. <br />
 As well as some `static` helpers on `BasicSelectorHelpers` and some `extensions` on `TimeOfDay` (See below).
 
-### Usage for `BasicTimeSelector`
-See [Properties]() for more details.
+### Usage for `BasicTimeSelector` <a id="basic_time_selector_usage"></a>
+See [Properties](#basic_time_selector_properties) for more details.
 ```dart
 import 'package:basic_selector/basic_selector.dart';
 
@@ -150,7 +150,7 @@ static final List<TimeOfDay> _times = BasicSelectorHelpers.generateTimes(minuteS
 If you want to see some usage examples, clone the [example app](https://github.com/eljorgit/basic_selector/tree/main/example) with usages like:
 * [**Numeric selector**](https://github.com/eljorgit/basic_selector/blob/main/example/lib/src/screens/numeric_example_screen.dart)
 * [**Text selector**](https://github.com/eljorgit/basic_selector/blob/main/example/lib/src/screens/text_example_screen.dart)
-* [**Time selector**](https://github.com/eljorgit/basic_selector/blob/main/example/lib/src/screens/time_example_screen.dart), see [`BasicTimeSelector`](#usage_for_`BasicTimeSelector`)
+* [**Time selector**](https://github.com/eljorgit/basic_selector/blob/main/example/lib/src/screens/time_example_screen.dart), see [`BasicTimeSelector`](#basic_time_selector_usage)
 
 # Properties
 ### `BasicSelector`
@@ -161,11 +161,11 @@ If you want to see some usage examples, clone the [example app](https://github.c
 | **onChanged** | `ValueChanged<T>` | A void callback function that runs when the selector changes | | :heavy_check_mark: |
 | **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
-| **styles** | [`BasicSelectorStyle`](#`BasicSelectorStyle`) | A way to style the `BasicSelector` | `const BasicSelectorStyle()` | |
+| **styles** | [`BasicSelectorStyle`](#basic_selector_style_properties) | A way to style the `BasicSelector` | `const BasicSelectorStyle()` | |
 | **loop** | `bool` | Enables infinite scroll for `items` | `false` | |
 | **reversed** | `bool` | To reverse the `items` | `false` | |
 
-### `BasicSelectorStyle`
+### `BasicSelectorStyle` <a id="basic_selector_style_properties"></a>
 | Property | Type | Description | Default Value | Required |
 |:---------|:-----|:------------|:--------------|:---------|
 | **selectedValueTextStyle** | `TextStyle` | Style for the selected value | `const TextStyle(fontWeight: FontWeight.bold)` | |
@@ -173,7 +173,7 @@ If you want to see some usage examples, clone the [example app](https://github.c
 | **selectedValueContainerDecoration** | `BoxDecoration` | Style for the container around the selected value | `null` ?? `BoxDecoration(color: Theme.of(context).colorScheme.surface,borderRadius: BorderRadius.circular(10),border: Border.all(color: Theme.of(context).colorScheme.primary,),)` | |
 | **bordersGradientBackgroundColor** | `Color` | Color for gradient on the edges of the selector  | `null` ?? `Theme.of(context).scaffoldBackgroundColor` | |
 
-### `BasicTimeSelector`
+### `BasicTimeSelector` <a id="basic_time_selector_properties"></a>
 | Property | Type | Description | Default Value | Required |
 |:---------|:-----|:------------|:--------------|:---------|
 | **time** | `TimeOfDay` | The selected time value | | :heavy_check_mark: |
@@ -193,18 +193,18 @@ If you want to see some usage examples, clone the [example app](https://github.c
 | **currentTime** | `TimeOfDay` | In case is needed a different time from `TimeOfDay.now()` | `null` ?? `TimeOfDay.now()` | |
 | **textFormatter** | `String Function(T item)` | A way to format the text shown on the selector on the dialog | `null` | |
 | **height** | `double` | The height of the selector | `200` | |
-| **styles** | [`BasicTimeSelectorStyle`](#`BasicTimeSelectorStyle`) | A way to style the `BasicTimeSelector` on the dialog | `const BasicTimeSelectorStyle()` | |
-| **config** | [`BasicTimeSelectorConfig`](#`BasicTimeSelectorConfig`) | A way to configure the `BasicTimeSelector`  on the dialog | `const BasicTimeSelectorConfig()` | |
-| **dialogConfig** | [`BasicTimeSelectorDialogConfig`](#`BasicTimeSelectorDialogConfig`) | A way to configure the `BasicTimeSelector.showModalDialog()` on the dialog | `const BasicTimeSelectorDialogConfig()` | |
+| **styles** | [`BasicTimeSelectorStyle`](#basic_time_selector_style_properties) | A way to style the `BasicTimeSelector` on the dialog | `const BasicTimeSelectorStyle()` | |
+| **config** | [`BasicTimeSelectorConfig`](#basic_time_selector_config_properties) | A way to configure the `BasicTimeSelector`  on the dialog | `const BasicTimeSelectorConfig()` | |
+| **dialogConfig** | [`BasicTimeSelectorDialogConfig`](#basic_time_selector_dialog_config_properties) | A way to configure the `BasicTimeSelector.showModalDialog()` on the dialog | `const BasicTimeSelectorDialogConfig()` | |
 | **loop** | `bool` | Enables infinite scroll for `items` | `false` | |
 
-### `BasicTimeSelectorStyle`
+### `BasicTimeSelectorStyle` <a id="basic_time_selector_style_properties"></a>
 Extends all properties from `BasicSelectorStyle` and also
 | Property | Type | Description | Default Value | Required |
 |:---------|:-----|:------------|:--------------|:---------|
 | **twoDotSeparatorStyle** | `TextStyle` | Style for ':' that is in the middle of the two selectors | `const TextStyle(fontWeight: FontWeight.bold,fontSize: 20,)` | |
 
-### `BasicTimeSelectorConfig`
+### `BasicTimeSelectorConfig` <a id="basic_time_selector_config_properties"></a>
 | Property | Type | Description | Default Value | Required |
 |:---------|:-----|:------------|:--------------|:---------|
 | **showOnlyFromCurrentType** | `bool` | Shows only the times from the selected `currentTime` | `false` | |
@@ -213,7 +213,7 @@ Extends all properties from `BasicSelectorStyle` and also
 | **startTime** | `TimeOfDay` | The start date when generating times | `null` | |
 | **endTime** | `TimeOfDay` | The end date when generating times | `null` | |
 
-### `BasicTimeSelectorConfig`
+### `BasicTimeSelectorDialogConfig` <a id="basic_time_selector_dialog_config_properties"></a>
 | Property | Type | Description | Default Value | Required |
 |:---------|:-----|:------------|:--------------|:---------|
 | **title** | `String` | A title for the dialog | `'Select a time'` | |

@@ -12,7 +12,8 @@ class NumericExampleScreen extends StatefulWidget {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         return SlideTransition(
           position: animation.drive(tween),
           child: child,
@@ -28,7 +29,8 @@ class NumericExampleScreen extends StatefulWidget {
 }
 
 class _NumericExampleScreenState extends State<NumericExampleScreen> {
-  static final List<int> _numbers = BasicSelectorHelpers.generateNumbers(end: 100);
+  static final List<int> _numbers =
+      BasicSelectorHelpers.generateNumbers(end: 100);
   int _selectedNumberBasic = 0;
   int _selectedNumberStyled1 = 0;
   int _selectedNumberStyled2 = 0;

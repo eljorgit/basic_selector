@@ -27,5 +27,6 @@ extension TimeOfDayExtensions on TimeOfDay {
     return toDouble() < other.toDouble();
   }
 
-  String formatted() => '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  String formatted() =>
+      '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
 }

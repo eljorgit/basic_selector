@@ -12,7 +12,8 @@ class HomeScreen extends StatelessWidget {
         const begin = Offset(1.0, 0.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         return SlideTransition(
           position: animation.drive(tween),
           child: child,
@@ -46,19 +47,22 @@ class HomeScreen extends StatelessWidget {
               leading: const Icon(Icons.pin_rounded),
               title: const Text('Numeric selector'),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => Navigator.of(context).pushNamed(NumericExampleScreen.routeName),
+              onTap: () => Navigator.of(context)
+                  .pushNamed(NumericExampleScreen.routeName),
             ),
             ListTile(
               leading: const Icon(Icons.abc_rounded),
               title: const Text('Text selector'),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => Navigator.of(context).pushNamed(TextExampleScreen.routeName),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(TextExampleScreen.routeName),
             ),
             ListTile(
               leading: const Icon(Icons.schedule_rounded),
               title: const Text('Time selectors'),
               trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => Navigator.of(context).pushNamed(TimeExampleScreen.routeName),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(TimeExampleScreen.routeName),
             ),
           ],
         ),

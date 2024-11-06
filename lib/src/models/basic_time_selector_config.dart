@@ -24,8 +24,10 @@ class BasicTimeSelectorConfig {
     bool? liveChange,
   }) {
     return BasicTimeSelectorConfig(
-      showOnlyFromCurrentType: showOnlyFromCurrentType ?? this.showOnlyFromCurrentType,
-      showOnlyToCurrentType: showOnlyToCurrentType ?? this.showOnlyToCurrentType,
+      showOnlyFromCurrentType:
+          showOnlyFromCurrentType ?? this.showOnlyFromCurrentType,
+      showOnlyToCurrentType:
+          showOnlyToCurrentType ?? this.showOnlyToCurrentType,
       minuteStep: minuteStep ?? this.minuteStep,
       startTime: startTime ?? this.startTime,
       endTime: endTime ?? this.endTime,

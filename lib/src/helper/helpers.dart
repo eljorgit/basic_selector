@@ -11,9 +11,11 @@ class BasicSelectorHelpers {
     T current = start ?? (T == int ? 0 as T : 0.0 as T);
     T interval = step ?? (T == int ? 1 as T : 1.0 as T);
 
-    while ((interval > 0 && current <= end) || (interval < 0 && current >= end)) {
+    while (
+        (interval > 0 && current <= end) || (interval < 0 && current >= end)) {
       range.add(current);
-      current = (T == int) ? (current + interval) as T : (current + interval) as T;
+      current =
+          (T == int) ? (current + interval) as T : (current + interval) as T;
     }
 
     return range;
@@ -35,7 +37,8 @@ class BasicSelectorHelpers {
     TimeOfDay? to,
     int minuteStep = 1,
   }) {
-    if (60 % minuteStep != 0) throw Exception('MinuteStep must be a divider of 60');
+    if (60 % minuteStep != 0)
+      throw Exception('MinuteStep must be a divider of 60');
 
     const totalHours = TimeOfDay.hoursPerDay;
     const totalMinutes = TimeOfDay.minutesPerHour;
