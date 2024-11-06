@@ -5,17 +5,17 @@
 ### With `BasicSelector`
 | Basic with numbers | Styling items with numbers | Styling container with numbers |
 |:---------:|:---------:|:--------------:|
-| ![](/assets/basic_numeric_selector.gif) | ![](/assets/basic_numeric_selector_styled_1.gif) | ![](/assets/basic_numeric_selector_styled_2.gif) |
+| ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_numeric_selector.gif) | ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_numeric_selector_styled_1.gif) | ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_numeric_selector_styled_2.gif) |
 
 
 | Basic with text | Basic loop with text
 |:---------:|:---------:|
-| ![](/assets/basic_text_selector.gif) | ![](/assets/basic_text_selector_loop.gif) |
+| ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_text_selector.gif) | ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_text_selector_loop.gif) |
 
 ### With `BasicTimeSelector`
 | Basic with time | Basic time selector | Basic time selector on dialog |
 |:---------:|:---------:|:--------------:|
-| ![](/assets/basic_selector_with_time.gif) | ![](/assets/basic_time_selector.gif) | ![](/assets/basic_time_selector_dialog.gif) |
+| ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_selector_with_time.gif) | ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_time_selector.gif) | ![](https://github.com/eljorgit/basic_selector/blob/main/assets/basic_time_selector_dialog.gif) |
 
 ## How to use
 The `BasicSelector` widget has three constructors. The `BasicSelector()` will use the default style. Also `BasicSelector.items()` which just uses the items list as formal parameter and `BasicSelector.loop()` which enables loop by default and just scrolls infinitely through the items provided.
