@@ -21,3 +21,7 @@
     - `builder` To build a custom dialog with custom content
     - `extraContent` Extra content below the selector
 * Added new examples to example app
+
+## 0.1.1
+
+* Fix basic time selector generated times as last value for hour to `23` and minutes to `59`

@@ -167,13 +167,13 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
   }
 
   void initTimeLists() {
-    _hours = BasicSelectorHelpers.generateNumbers(end: 24);
-    _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+    _hours = BasicSelectorHelpers.generateNumbers(end: 23);
+    _minutes = BasicSelectorHelpers.generateNumbers(end: 59, step: _config.minuteStep);
   }
 
   void _updateTimeLists() {
     if (_config.showOnlyFromCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(start: _currentTime.hour, end: 24);
+      _hours = BasicSelectorHelpers.generateNumbers(start: _currentTime.hour, end: 23);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
@@ -183,12 +183,12 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
         ).reversed.toList();
         _reverseMinutes = true;
       } else {
-        _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+        _minutes = BasicSelectorHelpers.generateNumbers(end: 59, step: _config.minuteStep);
         _reverseMinutes = false;
       }
     }
     if (_config.showOnlyToCurrentType) {
-      _hours = BasicSelectorHelpers.generateNumbers(start: 00, end: _currentTime.hour);
+      _hours = BasicSelectorHelpers.generateNumbers(start: 59, end: _currentTime.hour);
 
       if (widget.time.hour == _currentTime.hour) {
         _minutes = BasicSelectorHelpers.generateNumbers(
@@ -197,7 +197,7 @@ class _BasicTimeSelectorState extends State<BasicTimeSelector> {
           step: _config.minuteStep,
         );
       } else {
-        _minutes = BasicSelectorHelpers.generateNumbers(end: 60, step: _config.minuteStep);
+        _minutes = BasicSelectorHelpers.generateNumbers(end: 59, step: _config.minuteStep);
       }
     }
   }
