@@ -6,7 +6,6 @@ class BasicTimeSelectorConfig {
   final int minuteStep;
   final TimeOfDay? startTime;
   final TimeOfDay? endTime;
-  final bool liveChange;
 
   const BasicTimeSelectorConfig({
     this.showOnlyFromCurrentType = false,
@@ -14,7 +13,6 @@ class BasicTimeSelectorConfig {
     this.minuteStep = 1,
     this.startTime,
     this.endTime,
-    this.liveChange = false,
   });
 
   BasicTimeSelectorConfig copyWith({
@@ -31,7 +29,6 @@ class BasicTimeSelectorConfig {
       minuteStep: minuteStep ?? this.minuteStep,
       startTime: startTime ?? this.startTime,
       endTime: endTime ?? this.endTime,
-      liveChange: liveChange ?? this.liveChange,
     );
   }
 }

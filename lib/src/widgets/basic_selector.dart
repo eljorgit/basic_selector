@@ -9,6 +9,7 @@ class BasicSelector<T> extends StatefulWidget {
   final double height;
   final BasicSelectorStyle styles;
   final bool loop;
+  final bool reversed;
 
   const BasicSelector({
     super.key,
@@ -19,6 +20,7 @@ class BasicSelector<T> extends StatefulWidget {
     this.height = 200,
     this.styles = const BasicSelectorStyle(),
     this.loop = false,
+    this.reversed = false,
   });
 
   const BasicSelector.items(
@@ -30,6 +32,7 @@ class BasicSelector<T> extends StatefulWidget {
     this.height = 200,
     this.styles = const BasicSelectorStyle(),
     this.loop = false,
+    this.reversed = false,
   });
 
   const BasicSelector.loop({
@@ -40,6 +43,7 @@ class BasicSelector<T> extends StatefulWidget {
     this.textFormatter,
     this.height = 200,
     this.styles = const BasicSelectorStyle(),
+    this.reversed = false,
   }) : loop = true;
 
   @override
@@ -48,26 +52,46 @@ class BasicSelector<T> extends StatefulWidget {
 
 class _BasicSelectorState<T> extends State<BasicSelector<T>> {
   int _selectedIndex = 0;
+  late FixedExtentScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.items.indexWhere((item) => item == widget.value);
+
+    if (widget.reversed) {
+      var reversedIndex = widget.items.length - 1 - _selectedIndex;
+
+      _scrollController = FixedExtentScrollController(initialItem: reversedIndex);
+    } else {
+      _scrollController = FixedExtentScrollController(initialItem: _selectedIndex);
+    }
   }
 
   BasicSelectorStyle get _styles => widget.styles;
 
   List<Widget> get _items {
     return [
-      for (int index = 0; index < widget.items.length; index++)
-        Center(
-          child: Text(
-            _getText(widget.items[index]),
-            style: _selectedIndex == index
-                ? _styles.selectedValueTextStyle
-                : _styles.notSelectedValueTextStyle,
+      if (widget.reversed)
+        for (int index = widget.items.length - 1; index >= 0; index--)
+          Center(
+            child: Text(
+              _getText(widget.items[index]),
+              style: _selectedIndex == index
+                  ? _styles.selectedValueTextStyle
+                  : _styles.notSelectedValueTextStyle,
+            ),
+          )
+      else
+        for (int index = 0; index < widget.items.length; index++)
+          Center(
+            child: Text(
+              _getText(widget.items[index]),
+              style: _selectedIndex == index
+                  ? _styles.selectedValueTextStyle
+                  : _styles.notSelectedValueTextStyle,
+            ),
           ),
-        ),
     ];
   }
 
@@ -101,6 +125,7 @@ class _BasicSelectorState<T> extends State<BasicSelector<T>> {
             ),
           ),
           ListWheelScrollView.useDelegate(
+            controller: _scrollController,
             itemExtent: 40,
             diameterRatio: 3,
             physics: const FixedExtentScrollPhysics(),
@@ -113,10 +138,14 @@ class _BasicSelectorState<T> extends State<BasicSelector<T>> {
                   ),
             onSelectedItemChanged: (index) {
               setState(() {
-                _selectedIndex = index;
+                if (widget.reversed) {
+                  _selectedIndex = widget.items.length - 1 - index;
+                } else {
+                  _selectedIndex = index;
+                }
               });
 
-              widget.onChanged(widget.items[index]);
+              widget.onChanged(widget.items[_selectedIndex]);
             },
           ),
           IgnorePointer(

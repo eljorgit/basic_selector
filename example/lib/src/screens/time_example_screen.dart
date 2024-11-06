@@ -31,7 +31,9 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
   static final List<TimeOfDay> _times = BasicSelectorHelpers.generateTimes(minuteStep: 5);
   TimeOfDay _selectedTimeBasic = _times.first;
   TimeOfDay _selectedTime = _times.first;
-  TimeOfDay _selectedTimeFrom = _times.first;
+  TimeOfDay _selectedTimeFrom = const TimeOfDay(hour: 13, minute: 30);
+  TimeOfDay _selectedTimeTo = const TimeOfDay(hour: 0, minute: 0);
+  TimeOfDay _selectedTimeDialog = const TimeOfDay(hour: 0, minute: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,7 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                     items: _times,
                     value: _selectedTimeBasic,
                     textFormatter: (item) {
-                      return '${item.hour.toString().padLeft(2, '0')}:${item.minute.toString().padLeft(2, '0')}';
+                      return item.formatted();
                     },
                     onChanged: (item) {
                       setState(() {
@@ -88,7 +90,7 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                 ),
                 const SizedBox(height: 40),
                 Text(
-                  'With basic time selector: ${_selectedTime.format(context)}',
+                  'With basic time selector: ${_selectedTime.formatted()}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -99,7 +101,7 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                   child: BasicTimeSelector(
                     time: _selectedTime,
                     textFormatter: (item) {
-                      return '${item.hour.toString().padLeft(2, '0')}:${item.minute.toString().padLeft(2, '0')}';
+                      return item.formatted();
                     },
                     onChanged: (item) {
                       setState(() {
@@ -110,7 +112,7 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                 ),
                 const SizedBox(height: 40),
                 Text(
-                  'With basic time selector from 13:30 : ${_selectedTimeFrom.format(context)}',
+                  'With basic time selector from 13:30 : ${_selectedTimeFrom.formatted()}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -123,13 +125,69 @@ class _TimeExampleScreenState extends State<TimeExampleScreen> {
                     currentTime: const TimeOfDay(hour: 13, minute: 30),
                     config: const BasicTimeSelectorConfig(showOnlyFromCurrentType: true),
                     textFormatter: (item) {
-                      return '${item.hour.toString().padLeft(2, '0')}:${item.minute.toString().padLeft(2, '0')}';
+                      return item.formatted();
                     },
                     onChanged: (item) {
                       setState(() {
                         _selectedTimeFrom = item;
                       });
                     },
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  'With basic time selector to 13:30 : ${_selectedTimeTo.formatted()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: BasicTimeSelector(
+                    time: _selectedTimeTo,
+                    currentTime: const TimeOfDay(hour: 13, minute: 30),
+                    config: const BasicTimeSelectorConfig(showOnlyToCurrentType: true),
+                    textFormatter: (item) {
+                      return item.formatted();
+                    },
+                    onChanged: (item) {
+                      setState(() {
+                        _selectedTimeTo = item;
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  'With basic time selector from dialog: ${_selectedTimeDialog.formatted()}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Center(
+                  child: FilledButton(
+                    onPressed: () => BasicTimeSelector.showModalDialog(
+                      context,
+                      time: _selectedTimeDialog,
+                    ).then((value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedTimeDialog = value;
+                        });
+
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                            content: Text(
+                              'Date selected: ${_selectedTimeDialog.formatted()}',
+                            ),
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                      }
+                    }),
+                    child: const Text('Open dialog'),
                   ),
                 ),
               ],

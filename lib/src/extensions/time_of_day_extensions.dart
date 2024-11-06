@@ -26,4 +26,6 @@ extension TimeOfDayExtensions on TimeOfDay {
   bool isBefore(TimeOfDay other) {
     return toDouble() < other.toDouble();
   }
+
+  String formatted() => '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
 }
